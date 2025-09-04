@@ -1,0 +1,73 @@
+# =========================================
+# Unity .gitignore
+# =========================================
+
+# Archivos de Unity generados automáticamente
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+
+# Archivos de cache de paquetes
+[Pp]ackage[Cc]ache/
+
+# Configuración local (máquina del usuario)
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# Cache de Rider/JetBrains
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+# Archivos de compilación
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata/
+*.class
+*.jar
+*.java
+*.dex
+*.so
+*.dylib
+*.dll
+*.exe
+*.app
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Builds exportadas
+[Bb]uilds/
+[Bb]in/
+[Rr]elease/
+[Dd]ebug/
+
+# Otros
+sysinfo.txt
+*.stackdump
+*.log
