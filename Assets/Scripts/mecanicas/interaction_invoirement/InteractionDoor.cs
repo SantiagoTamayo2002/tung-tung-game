@@ -9,12 +9,15 @@ public class InteractionDoor : MonoBehaviour
     // necesitamos una mascara para que el rycast no choque con el player
     public LayerMask mascara;
     public float distancia = 4.5f;
-    public string texto_consola;
+    public GameObject textDoor;
+    private bool puertaDetectada;
+
     void Start()
     {
         mascara = LayerMask.GetMask("detectar raycast");
-        texto_consola = "nada";
-        Debug.Log(texto_consola);
+        puertaDetectada = false;
+        textDoor.SetActive(puertaDetectada);
+
     }
 
     /* 
@@ -31,8 +34,8 @@ public class InteractionDoor : MonoBehaviour
         {
             if (objetoImpactado.collider.CompareTag("puerta_interactuable"))
             {
-                texto_consola = "puerta detectada";
-                Debug.Log(texto_consola);
+                puertaDetectada = true;
+                textDoor.SetActive(puertaDetectada);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     SceneManager.LoadScene(2);
@@ -41,8 +44,8 @@ public class InteractionDoor : MonoBehaviour
             
         }else
             {
-                texto_consola = "nada";
-                Debug.Log(texto_consola);
+                puertaDetectada = false;
+                textDoor.SetActive(puertaDetectada);
             }
     }
 }
