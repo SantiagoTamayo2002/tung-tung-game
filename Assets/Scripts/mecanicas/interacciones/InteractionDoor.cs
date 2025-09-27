@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,11 @@ using UnityEngine.SceneManagement;
 public class InteractionDoor : MonoBehaviour
 {
 
-    // necesitamos una mascara para que el rycast no choque con el player
+    [Header("máscara de reconocimiento")] // necesitamos una mascara para que el rycast no choque con el player
     public LayerMask mascara;
+    [Header("distancia de interacción")]
     public float distancia = 4.5f;
+    [Header("texto de interacción")]
     public GameObject textDoor;
     private bool puertaDetectada;
 
@@ -41,11 +44,11 @@ public class InteractionDoor : MonoBehaviour
                     SceneManager.LoadScene(2);
                 }
             }
-            
-        }else
-            {
-                puertaDetectada = false;
-                textDoor.SetActive(puertaDetectada);
-            }
+
+        } else
+        {
+            puertaDetectada = false;
+            textDoor.SetActive(puertaDetectada);
+        }
     }
 }

@@ -8,7 +8,7 @@ public class Flashlight : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F))
         {
             flashlight.enabled = !flashlight.enabled;
-            UIManager.Instance.SetLinterna(flashlight.enabled);
+            //UIManager.Instance.SetLinterna(flashlight.enabled);
         }
     }
 }

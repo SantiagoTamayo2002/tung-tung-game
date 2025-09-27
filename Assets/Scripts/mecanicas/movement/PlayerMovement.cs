@@ -22,10 +22,15 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float xRotation = 0f;
 
+    // Guardamos el índice del layer "Ignore"
+    private int ignoreLayer;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        ignoreLayer = LayerMask.NameToLayer("Ignore");
     }
 
     void Update()
@@ -37,8 +42,11 @@ public class PlayerMovement : MonoBehaviour
 
     void GroundCheck()
     {
-        // Detección del suelo usando una esfera pequeña en los pies
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(
+            groundCheck.position,
+            groundDistance,
+            groundMask
+        );
 
         if (isGrounded && velocity.y < 0)
         {
@@ -51,20 +59,16 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        // Movimiento horizontal (X/Z)
         Vector3 move = transform.right * x + transform.forward * z;
         move = move.normalized * speed;
 
-        // Saltar
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        // Gravedad
         velocity.y += gravity * Time.deltaTime;
 
-        // Combinar horizontal + vertical
         Vector3 finalMove = move + new Vector3(0, velocity.y, 0);
         controller.Move(finalMove * Time.deltaTime);
     }
@@ -86,5 +90,15 @@ public class PlayerMovement : MonoBehaviour
         if (groundCheck == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // Si el objeto está en el layer "Ignore", desactivamos la colisión
+        if (hit.gameObject.layer == ignoreLayer)
+        {
+            Physics.IgnoreCollision(controller, hit.collider, true);
+            Debug.Log($"⛔ Ignorando colisión con {hit.gameObject.name}");
+        }
     }
 }
